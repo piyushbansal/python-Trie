@@ -1,3 +1,6 @@
+# Python Trie Implementation
+# Author : Piyush Bansal
+
 #!/usr/bin/env python
 b=[]                              # A container that would hold suggestions 
 

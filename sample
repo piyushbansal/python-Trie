@@ -1,0 +1,100 @@
+################                          insert(trie, word):                            ####################
+
+Inserts 'word' into trie and returns number of duplicates of 'word' present in trie. ( including
+the newly inserted ).
+Example, consider the above mentioned trie having words{cat, call, cast, crow, calls, band}
+as already constructed. Now :
+
+Input: 							//No. of instructions
+2 							//instruction-1
+insert calls 						//instruction-2
+insert bat 
+
+Output: 						//case-1 output
+2 							//case-2 output
+1 
+
+##############     search(trie,word): [also returns matching words or suggestions :) ]   #####################
+
+if 'word' is in trie : returns “true” and number of instances of 'word' in trie.
+Else returns “false” and list of tuples of all the words and there instance count (duplicate
+count) in sorted order which have largest matched prefix with the input word.
+For example, considering above mentioned trie as already constructed:
+
+Input:
+4                              //No. of instructions for the program.
+search calling                 // instruction -1 
+search call                    // instruction -2
+insert call                    // instruction -3
+search calling                 // instruction -4
+
+Output:
+false call 1 calls 1           //case-1 output
+true 1                         //case-2 output
+2                              //case-3 output
+false call 2 calls 1           //case-4 output
+
+Explanation of case-1 : 'calling' is not found so 'false'. Now, call and calls each have longest
+common prefix 'call' with 'calling'. So, both with their number of instances are returned. 'call'
+comes first to 'calls' due to sorted order.
+
+##############                        remove(trie,word):                                   ###################
+
+if 'word' is in trie, removes single instance of 'word' and prints the number of remaining
+duplicates of the 'word'.
+Else print "-1"
+Example, consider the above mentioned trie having words{cat, call, cast, crow, calls, band}
+as already constructed. Now :
+
+Input:        			
+6             			//No. of instructions
+insert calls  			//instruction-1
+remove calls  			//instruction-2
+remove calls  			//instruction-3
+remove calls  			//instruction-4
+remove calls 			//instruction-5
+insert calls                    //instruction-6
+
+Output:
+2 				//case-1 output
+1 				//case-2 output
+0 				//case-3 output
+-1 				//case-4 output
+-1 				//case-5 ouput
+1 				//case-6 output
+
+################                          ptrie(trie):                                     ###################
+
+Prints trie with indentations. The print of the trie starts with a single line of root, and each
+level adds an indentation of | . The entries in print are in lexicographical order, which
+implies that the output is unique. Duplicates aren't  printed.
+Example, consider the above mentioned trie having words{cat, call, cast, crow, calls, band}
+as already constructed( using update function). Now :
+
+Input:
+1
+ptrie
+
+
+Output:
+root
+|b
+||a
+|||n
+||||d
+|||||$
+|c
+||a
+|||l
+||||l
+|||||$
+|||||s
+||||||$
+|||s
+||||t
+|||||$
+||r
+|||o
+||||w
+|||||$
+
