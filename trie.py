@@ -10,8 +10,8 @@ class Trie():
 	self.depth=0             # depth of each character in a particular path
 
 #--------------------------------------------------------------------------------------#
-'''            Internal Function that returns bool true if key exists in the trie 
-		and false otherwise , along with the count , it occurs              '''
+#            Internal Function that returns bool true if key exists in the trie        #
+#		and false otherwise , along with the count , it occurs                 # 
 
     def __contains__(self, word):
 	word=word+'$'
@@ -31,7 +31,7 @@ class Trie():
 	       return [False,0]
 
 #----------------------------------------------------------------------------------------#
-'''         Internal Function to insert a word into the trie 			'''
+#         Internal Function to insert a word into the trie 			         #
 
     def __add__(self, word):
 	word=word+'$'
@@ -54,13 +54,13 @@ class Trie():
 #---------------------------------------------------------------------------------------#
 
     def update(self, words):
-'''              A Function to update tree with multiple words at once      '''
+#              A Function to update tree with multiple words at once                    #
         for word in words:
             self.add(word)
 
    
 #---------------------------------------------------------------------------------------#
-'''           Internal Function to print trie in indented form (calls ptrie)       '''
+#           Internal Function to print trie in indented form (calls ptrie)              #
 
     def __ptrie__(self):
 	    temp = self.root.keys()
@@ -74,7 +74,7 @@ class Trie():
 				    curr_node.__ptrie__()
 
 #---------------------------------------------------------------------------------------#
-''' 			Internal functions for remove operation                       '''
+# 			Internal functions for remove operation                         #
 
     def __reduces__(self, word):
 	word=word+'$'
@@ -107,16 +107,16 @@ class Trie():
 		del self.root[head]
 
 #----------------------------------------------------------------------------------------------#
-'''                Internal Functions for obtaining suggestions                   '''
+#                Internal Functions for obtaining suggestions                                  #
 
     a=[]
-    def __moresuggest__(self,word):
+    def __collectsuggestions__(self,word):
 	    for char in self.root.keys():
 		    if self.root[char].root.has_key('$') :
 		    	    self.a.append(word+char)
 		#	    print self.a
 		    if char !=None and char !='$':
-		    	    self.root[char].__moresuggest__(word+char)
+		    	    self.root[char].__collectsuggestions__(word+char)
 	    return self.a
 
     def __suggests__(self,key,x=''):
@@ -128,12 +128,12 @@ class Trie():
 			    if len(key)>1:
 		    		    curr_node.__suggests__(key[1:],x)
 			    else :
-				  b=curr_node.__moresuggest__(x)
+				  b=curr_node.__collectsuggestions__(x)
 
 #--------------------------------------------------------------------------------------------#
-'''                      Functions intended to be called by user                         '''
+#                      Functions intended to be called by user                               #
 
-     def insert(self,word):
+    def insert(self,word):
 	    self.__add__(word)
 	    print str(self.__contains__(word)[1])
 
@@ -152,7 +152,7 @@ class Trie():
 	    self.__ptrie__()
 
 
-     def search(self,word):
+    def search(self,word):
 	counter=0
 	global b
 	length=len(b)
@@ -167,5 +167,22 @@ class Trie():
 		print ''
 
 #--------------------------------------------------------------------------------------------------#
+
+if __name__=="__main__":
+	t=Trie()
+	testcases=input()
+	while testcases:
+		testcases-=1
+		string=raw_input()
+		if len(string)>1:
+			command=string.split()
+			if command[0]=='insert':
+				t.insert(command[1])
+			if command[0]=='search':
+				t.search(command[1])
+			if command[0]=='remove':
+				t.remove(command[1])
+			if command[0]=='ptrie':
+				t.ptrie()
 
 
